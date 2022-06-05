@@ -1,7 +1,8 @@
 const require = require('inquirer');
+const fs = require('fs');
+const Employee = require('./employee');
 
 
-//TODO: Make Person constructor
 
 
 
