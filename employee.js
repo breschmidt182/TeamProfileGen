@@ -1,7 +1,7 @@
-const Employee = require('./test/employee.test');
-const Manager = require('./test/manager.test');
-const Engineer = require('./test/engineer.test');
-const Intern = require('./test/intern.test');
+// const employee = require('./test/employee.test');
+// const manager = require('./test/manager.test');
+// const engineer = require('./test/engineer.test');
+// const intern = require('./test/intern.test');
 
 class Employee {
     constructor(name,id,email,role) {
@@ -10,61 +10,67 @@ class Employee {
         this.email = email;
         this.role = role;
     }
-    getName(name) {
+
+    if (name = undefined || id == undefined || email== undefined || role == undefined) {
+        throw new Error('Name, email, and role need to be provided')
+    }
+
+    getName() {
         return this.name;
     }  
-    getId(id) {
+    getId() {
+        if (this.id <= 0) {
+            throw new Error("ID must be greater than 0")
+        }
        return this.id;
     }
-    getEmail(email) {
+    getEmail() {
         return this.email;
     }
-    getRole(role) {
+    getRole() {
         return this.role;
     }
 }
 
 class Manager extends Employee {
-    constructor(officeNumber,role) {
-        super();
+    constructor(name, id, email, officeNumber) {
+        super(name, id, email);
         this.officeNumber = officeNumber;
-        this.role = role;
     }
-    getRole(role) {
-        return this.role;
+    getRole() {
+        return "Manager";
     }
-    getOfficeNumber(officeNumber) {
+    getOfficeNumber() {
         return this.officeNumber;
     }
 }
 
 class Engineer extends Employee {
-    constructor(GitHubUserName, role) {
-        super();
+    constructor(name, id, email, GitHubUserName, role) {
+        super(name, id, email);
         this.github = GitHubUserName;
         this.role = role;
     }
-    getgithub(GitHubUserName) {
+    getGithub() {
         return this.github;
     }
-    getRole(role) {
+    getRole() {
         return this.role;
     }
 }
 
 class Intern extends Employee {
-    constructor(school, role) {
-        super();
+    constructor(name, id, email, school) {
+        super(name, id, email);
         this.school = school;
-        this.role = role;
     }
-    getSchool(school) {
+    getSchool() {
         return this.school;
     }
-    getRole(role) {
-        return this.role;
+    getRole() {
+        return 'intern';
     }
 }
 
-module.exports = Employee, Manager, Engineer, Intern;
+module.exports = {Employee, Manager, Engineer, Intern};
 
