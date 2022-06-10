@@ -1,6 +1,142 @@
-const require = require('inquirer');
+const inquirer = require('inquirer');
 const fs = require('fs');
 const Employee = require('./employee');
+const generateHTML = require('./dist_HTML_Css/generateHTML');
+
+
+
+const choices =   {
+    type: "list",
+    choices: ["Engineer", "Manager", "Intern","cancel"],
+    name: "choices",
+    message: "What position do you want to have??",
+
+}
+
+const engineerQuestions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the employee's name?"
+     },
+     {
+         type: 'input',
+         name: 'id',
+         message: "What is the employees's id?"
+     },
+     {
+         type: 'input',
+         name: 'email',
+         message: " What is the employee's email?"
+     },
+    {
+        type: 'input',
+        name: 'github',
+        message: "What is the engineer's GitHub username?"
+    },
+]
+
+const managerQuestions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the employee's name?"
+     },
+     {
+         type: 'input',
+         name: 'id',
+         message: "What is the employees's id?"
+     },
+     {
+         type: 'input',
+         name: 'email',
+         message: " What is the employee's email?"
+     },
+     {
+         type: 'input',
+         name: 'officeNumber',
+         message: "What is the manager's office number?"
+     }
+]
+
+const internQuestions = [
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the employee's name?"
+     },
+     {
+         type: 'input',
+         name: 'id',
+         message: "What is the employees's id?"
+     },
+     {
+         type: 'input',
+         name: 'email',
+         message: " What is the employee's email?"
+     },
+     {
+         type: 'input',
+         name: 'school',
+         message: "What school is the intern enrolled in?"
+     }
+]
+
+
+function createTeam() {
+    // inquirer prompt for menu questions choices= engineer, intern, or done
+    inquirer.prompt(choices)
+    // .then(choice) 
+    .then(choice => {
+        console.log(answers)
+    })
+    // switch case key= answers.choice value= engineer
+    let info = ''
+    switch(answers.choice) {
+        case 'Engineer':
+            info = answers.engineerQuestions
+        break;
+
+        case 'Manager':
+            info = answers.managerQuestions
+        break;
+
+        case 'Intern':
+            info = answers.internQuestions
+        break;
+
+    }
+    return info
+}
+
+function createManager() {
+    inquirer.prompt(managerQuestions)
+    .then(answers => {
+        console.log(answers)
+        // push manager to team array
+        createTeam()
+    })
+}
+// TODO: Create a function to initialize app
+function init() {
+  createTeam()
+  createManager() 
+    // inquirer.prompt(questions)
+    //     .then(data => {
+    //         console.log(data);
+    //         writeToFile('Team Profile Generator', data)
+    //     });
+
+}
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, generateHTML(data), err =>
+        err ? console.log(err) : console.log('Success!')
+    );
+}
+
+// Function call to initialize app
+init();
 
 
 

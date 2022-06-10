@@ -8,7 +8,7 @@ describe('Engineer', () => {
         expect(engineer.getId()).toEqual(2);
         expect(engineer.getEmail()).toEqual('ryan@gmail.com');
         expect(engineer.getGithub()).toEqual('yeeyee18')
-        expect(engineer.getRole()).toEqual('engineer');
+        expect(engineer.getRole()).toEqual('Engineer');
     })
 
     // it('should throw an error if nothing is entered for their name, email, github, and role', () => {
