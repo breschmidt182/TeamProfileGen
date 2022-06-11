@@ -45,9 +45,9 @@ class Manager extends Employee {
 }
 
 class Engineer extends Employee {
-    constructor(name, id, email, GitHubUserName) {
+    constructor(name, id, email, github) {
         super(name, id, email);
-        this.github = GitHubUserName;
+        this.github = github;
     }
     getGithub() {
         return this.github;
