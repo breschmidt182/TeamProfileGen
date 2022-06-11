@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require('./employee');
+const Employee = require('./Employee');
 const generateHTML = require('./dist_HTML_Css/generateHTML');
 
 
@@ -9,7 +9,7 @@ const choices =   {
     type: "list",
     choices: ["Engineer", "Manager", "Intern","cancel"],
     name: "choices",
-    message: "What position do you want to have??",
+    message: "What position do you want to add?",
 
 }
 
@@ -17,17 +17,17 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is the employee's name?"
+        message: "What is the engineer's name?"
      },
      {
          type: 'input',
          name: 'id',
-         message: "What is the employees's id?"
+         message: "What is the engineer's id?"
      },
      {
          type: 'input',
          name: 'email',
-         message: " What is the employee's email?"
+         message: " What is the engineer's email?"
      },
     {
         type: 'input',
@@ -40,17 +40,17 @@ const managerQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is the employee's name?"
+        message: "What is the manager's name?"
      },
      {
          type: 'input',
          name: 'id',
-         message: "What is the employees's id?"
+         message: "What is the manager's id?"
      },
      {
          type: 'input',
          name: 'email',
-         message: " What is the employee's email?"
+         message: " What is the manager's email?"
      },
      {
          type: 'input',
@@ -63,17 +63,17 @@ const internQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is the employee's name?"
+        message: "What is the intern's name?"
      },
      {
          type: 'input',
          name: 'id',
-         message: "What is the employees's id?"
+         message: "What is the intern's id?"
      },
      {
          type: 'input',
          name: 'email',
-         message: " What is the employee's email?"
+         message: " What is theintern's email?"
      },
      {
          type: 'input',
@@ -87,26 +87,26 @@ function createTeam() {
     // inquirer prompt for menu questions choices= engineer, intern, or done
     inquirer.prompt(choices)
     // .then(choice) 
-    .then(choice => {
+    .then(answers => {
         console.log(answers)
+        let info = ''
+        switch(answers.choices) {
+            case 'Engineer':
+                info = engineerQuestions
+            break;
+    
+            case 'Manager':
+                info = managerQuestions
+            break;
+    
+            case 'Intern':
+                info = internQuestions
+            break;
+    
+        }
+        return info
     })
     // switch case key= answers.choice value= engineer
-    let info = ''
-    switch(answers.choice) {
-        case 'Engineer':
-            info = answers.engineerQuestions
-        break;
-
-        case 'Manager':
-            info = answers.managerQuestions
-        break;
-
-        case 'Intern':
-            info = answers.internQuestions
-        break;
-
-    }
-    return info
 }
 
 function createManager() {
@@ -117,10 +117,31 @@ function createManager() {
         createTeam()
     })
 }
+
+function createEngineer() {
+    inquirer.prompt(engineerQuestions)
+    .then(answers => {
+        console.log(answers)
+        // push manager to team array
+        createTeam()
+    })
+}
+
+function createIntern() {
+    inquirer.prompt(internQuestions)
+    .then(answers => {
+        console.log(answers)
+        // push manager to team array
+        createTeam()
+    })
+}
+
 // TODO: Create a function to initialize app
 function init() {
   createTeam()
   createManager() 
+  createEngineer()
+  createIntern()
     // inquirer.prompt(questions)
     //     .then(data => {
     //         console.log(data);
