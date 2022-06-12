@@ -74,7 +74,7 @@ const internQuestions = [
      {
          type: 'input',
          name: 'email',
-         message: " What is theintern's email?"
+         message: " What is the intern's email?"
      },
      {
          type: 'input',
