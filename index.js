@@ -150,9 +150,9 @@ function init() {
 
 }
 
-function writeToFile(test) {
-    console.log(test);
-    fs.writeFile('Sample-team.html', generateHTML(test), err =>
+function writeToFile(data) {
+    console.log(data);
+    fs.writeFile('Sample-team.html', generateHTML(data), err =>
         err ? console.log(err) : console.log('Success!')
     );
 }
